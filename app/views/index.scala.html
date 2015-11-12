@@ -1,0 +1,52 @@
+@(message: String, user: String, sts: String)
+
+@main("Community Tool Management System") {
+
+
+
+        <form action="@routes.Application.showUserForm()" method="get">
+            <button type="submit" class="btn btn-md btn-link" id="userLogin">
+                @sts
+            </button>
+            Welcome @user
+            <hr>
+        </form>
+
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group col-md-9">
+                <input type="search" class="form-control" placeholder="Search" size="130">
+            </div>
+            <div class="btn-group col-md-1">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Tools <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">All Tools</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Another action</a></li>
+                    <li><a href="#">Something else here</a></li>
+                    <li><a href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <div class="btn-group col-md-1">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Borough <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">All Borough</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="#">Bronx</a></li>
+                    <li><a href="#">Brooklyn</a></li>
+                    <li><a href="#">Manhattan</a></li>
+                    <li><a href="#">Queens</a></li>
+                    <li><a href="#">Staten Island</a></li>
+                </ul>
+            </div>
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+
+        </form>
+
+
+}

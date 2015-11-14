@@ -18,7 +18,7 @@
 
         <center>
 
-            <form action="@routes.Application.addUser()" method="post">
+            <form action="@routes.Application.signUp()" method="post">
                 <div class="form-group">
                     <div class="form-group">
                         <label for="fn" class="control-label">First Name</label>
@@ -37,6 +37,9 @@
                     <div class="form-group">
                         <label for="password" class="control-label">
                             Password
+                            @(if(flash.containsKey("error")){
+                                <p class="warning">Password should be minimum 8 characters long.</p>
+                            })
                         </label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
@@ -52,7 +55,7 @@
     </td>
     <td>
     <center>
-        <form action="@routes.Application.addUser()" method="post">
+        <form action="@routes.Application.logIn()" method="post">
         <div class="form-group">
             <div class="form-group">
                 <label for="emails" class="control-label">

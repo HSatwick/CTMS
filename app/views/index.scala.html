@@ -1,16 +1,33 @@
-@(message: String, user: String, sts: String)
+@(message: String)
 
 @main("Community Tool Management System") {
 
 
+<form action="@routes.Application.showUserForm()" method="get">
+        @if(!flash.containsKey("success")){
+            <div>
 
-        <form action="@routes.Application.showUserForm()" method="get">
-            <button type="submit" class="btn btn-md btn-link" id="userLogin">
-                @sts
-            </button>
-            Welcome @user
-            <hr>
-        </form>
+                <button type="submit" class="btn btn-md btn-link" id="userLogin">
+                    Log In
+                </button>
+                Welcome
+
+            </div>
+        }
+</form>
+
+<form action="@routes.Application.logout()" method="get">
+    @if(flash.containsKey("success")){
+    <div>
+
+        <button type="submit" class="btn btn-md btn-link" id="userLogin">
+            Log Out
+        </button>
+        Welcome @flash.get("success")
+
+    </div>
+    }
+</form>
 
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group col-md-9">

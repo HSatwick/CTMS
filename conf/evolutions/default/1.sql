@@ -4,26 +4,20 @@
 # --- !Ups
 
 create table users (
-  id                        varchar(255) not null,
+  user_id                   bigserial not null,
   first_name                varchar(255),
   last_name                 varchar(255),
   email_adrs                varchar(255),
   password                  varchar(255),
-  constraint pk_users primary key (id))
+  constraint uq_users_email_adrs unique (email_adrs),
+  constraint uq_users_password unique (password),
+  constraint pk_users primary key (user_id))
 ;
-
-create sequence users_seq;
 
 
 
 
 # --- !Downs
 
-SET REFERENTIAL_INTEGRITY FALSE;
-
-drop table if exists users;
-
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists users_seq;
+drop table if exists users cascade;
 

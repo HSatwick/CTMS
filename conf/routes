@@ -5,9 +5,9 @@
 # Home page
 GET     /                           controllers.Application.index()
 GET     /user_login                 controllers.Application.showUserForm()
-GET     /newUser                    controllers.Application.signInUser()
-
-POST    /addUser                   controllers.Application.addUser()
+POST    /newUser                    controllers.Application.logIn()
+POST    /addUser                    controllers.Application.signUp()
+GET     /logout                     controllers.Application.logout()
 
 
 # Map static resources from the /public folder to the /assets URL path

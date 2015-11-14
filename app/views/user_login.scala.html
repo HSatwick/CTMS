@@ -14,11 +14,18 @@
     <td><b><center>Sign In</center></b></td>
 </tr>
 
+@if(flash.containsKey("error")){
+<div class="alert alert-danger">
+    @flash.get("error")
+</div>
+}
+
     <td>
 
         <center>
 
             <form action="@routes.Application.signUp()" method="post">
+
                 <div class="form-group">
                     <div class="form-group">
                         <label for="fn" class="control-label">First Name</label>
@@ -37,9 +44,6 @@
                     <div class="form-group">
                         <label for="password" class="control-label">
                             Password
-                            @(if(flash.containsKey("error")){
-                                <p class="warning">Password should be minimum 8 characters long.</p>
-                            })
                         </label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
@@ -56,6 +60,7 @@
     <td>
     <center>
         <form action="@routes.Application.logIn()" method="post">
+
         <div class="form-group">
             <div class="form-group">
                 <label for="emails" class="control-label">
@@ -70,7 +75,7 @@
                 <input type="password" name="password" class="form-control" id="passwords">
             </div>
             <div class="form-group">
-                <input type="submit" value="Cancel" class="btn btn-warning">
+                <a href="/" class="btn btn-warning">Cancel</a>
                 <input type="submit" value="Sign In" class="btn btn-primary">
             </div>
         </div>

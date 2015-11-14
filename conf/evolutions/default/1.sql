@@ -3,6 +3,18 @@
 
 # --- !Ups
 
+create table boroughs (
+  bor_id                    varchar(255) not null,
+  bor_name                  varchar(255),
+  constraint pk_boroughs primary key (bor_id))
+;
+
+create table categories (
+  cat_id                    varchar(255) not null,
+  cat_name                  varchar(255),
+  constraint pk_categories primary key (cat_id))
+;
+
 create table users (
   user_id                   bigserial not null,
   first_name                varchar(255),
@@ -18,6 +30,10 @@ create table users (
 
 
 # --- !Downs
+
+drop table if exists boroughs cascade;
+
+drop table if exists categories cascade;
 
 drop table if exists users cascade;
 

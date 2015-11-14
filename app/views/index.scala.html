@@ -1,46 +1,53 @@
-@(message: String, user: String, sts: String)
+@(message: String, tools: List[ToolCategory], bor:List[Borough])
 
 @main("Community Tool Management System") {
 
 
+<form action="@routes.Application.showUserForm()" method="get">
+        @if(!flash.containsKey("success")){
+            <div>
 
-        <form action="@routes.Application.showUserForm()" method="get">
-            <button type="submit" class="btn btn-md btn-link" id="userLogin">
-                @sts
-            </button>
-            Welcome @user
-            <hr>
-        </form>
+                <button type="submit" class="btn btn-md btn-link" id="userLogin">
+                    Log In
+                </button>
+                Welcome
+
+            </div>
+        }
+</form>
+
+<form action="@routes.Application.logout()" method="get">
+    @if(flash.containsKey("success")){
+    <div>
+
+        <button type="submit" class="btn btn-md btn-link" id="logIn">
+            Log Out
+        </button>
+        Welcome @flash.get("success")
+
+    </div>
+    }
+</form>
 
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group col-md-9">
                 <input type="search" class="form-control" placeholder="Search" size="130">
             </div>
-            <div class="btn-group col-md-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Tools <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">All Tools</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li><a href="#">Separated link</a></li>
-                </ul>
+            <div class="btn-group col-md-1" id="categories">
+                <select style="height:2.5em; width:100px;">
+                    <option value="">All Tools</option>
+                    @for(t <- tools){
+                    <option value="@t.cat_id">@t.cat_name</option>
+                    }
+                </select>
             </div>
-            <div class="btn-group col-md-1">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Borough <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">All Borough</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">Bronx</a></li>
-                    <li><a href="#">Brooklyn</a></li>
-                    <li><a href="#">Manhattan</a></li>
-                    <li><a href="#">Queens</a></li>
-                    <li><a href="#">Staten Island</a></li>
-                </ul>
+            <div class="btn-group col-md-1" id="boroughs">
+                <select style="height:2.5em; width:100px;">
+                    <option value="">All Borough</option>
+                    @for(b <- bor){
+                    <option value="@b.bor_id">@b.bor_name</option>
+                    }
+                </select>
             </div>
             <div class="col-md-1">
                 <button type="submit" class="btn btn-primary">Search</button>

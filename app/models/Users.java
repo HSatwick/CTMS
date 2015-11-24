@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.*;
+import java.util.*;
 
 @Table(name="users")
 @Entity
@@ -32,10 +33,13 @@ public class Users extends Model{
     @Column(unique=true)
     public String emailAdrs;
 
-
     @Constraints.Required
     @Column(unique=true)
     public String password;
+
+    @Constraints.Required
+    @OneToMany
+    public List<Borrowed> users_borrowed_tools;
 
     public static Finder<String,Users> find = new Finder<String,Users>(
             String.class, Users.class

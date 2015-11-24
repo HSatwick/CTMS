@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Created by user on 11/14/2015.
+ * Created by user on 11/17/2015.
  */
 
 import com.avaje.ebean.Model;
@@ -14,24 +14,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.*;
-import java.util.*;
 
-
-@Table(name="categories")
+@Table(name="comments")
 @Entity
-public class ToolCategory extends Model{
+public class Comment extends Model {
 
     @Id
-    public String cat_id;
+    public String comment_id;
 
     @Constraints.Required
-    public String cat_name;
+    public Users user;
 
     @Constraints.Required
-    @OneToMany
-    public List<Tools> consistsOf;
-
-
-    public static Finder<String,ToolCategory> find = new Finder<String,ToolCategory>(String.class,ToolCategory.class);
+    public Tools tool;
 
 }

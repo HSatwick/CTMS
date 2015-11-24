@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Created by user on 11/14/2015.
+ * Created by user on 11/17/2015.
  */
 
 import com.avaje.ebean.Model;
@@ -14,24 +14,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.*;
+import org.joda.time.*;
 import java.util.*;
 
-
-@Table(name="categories")
+@Table(name="borrowed")
 @Entity
-public class ToolCategory extends Model{
+public class Borrowed extends Model {
 
     @Id
-    public String cat_id;
+    public String id;
 
     @Constraints.Required
-    public String cat_name;
+    @ManyToOne
+    public Users users;
 
     @Constraints.Required
-    @OneToMany
-    public List<Tools> consistsOf;
+    @ManyToOne
+    public Tools tools;
 
+    @Constraints.Required
+    public DateTime duration;
 
-    public static Finder<String,ToolCategory> find = new Finder<String,ToolCategory>(String.class,ToolCategory.class);
 
 }

@@ -22,7 +22,7 @@ public class Application extends Controller {
     public Result index() {
         List<ToolCategory> tools = ToolCategory.find.all();
         List<Borough> boroughs = Borough.borough.all();
-        return ok(index.render("Community Tool Management System",tools, boroughs));
+        return ok(index.render("Community Tool Management System",tools, boroughs,search.render()));
     }
 
     public Result showUserForm() {

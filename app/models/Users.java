@@ -37,7 +37,9 @@ public class Users extends Model{
     @Column(unique=true)
     public String password;
 
-    @Constraints.Required
+    @OneToMany
+    public List<Comment> comments;
+
     @OneToMany
     public List<Borrowed> users_borrowed_tools;
 

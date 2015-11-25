@@ -35,5 +35,4 @@ public class Borrowed extends Model {
     @Constraints.Required
     public DateTime duration;
 
-
 }

@@ -38,6 +38,12 @@ public class Tools extends Model{
     public Users tool_owner;
 
     @Constraints.Required
+    @ManyToOne
+    public Borough borough;
+
+    @OneToMany
+    public List<Comment> toolComments;
+
     @OneToMany
     public List<Borrowed> tools_borrowedBy_users;
 

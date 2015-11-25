@@ -27,7 +27,7 @@ public class ToolCategory extends Model{
     @Constraints.Required
     public String cat_name;
 
-    @Constraints.Required
+
     @OneToMany
     public List<Tools> consistsOf;
 

@@ -1,34 +1,33 @@
-@(message: String, tools: List[ToolCategory], bor:List[Borough], content:Html)
+@(username: String, tools: List[ToolCategory], bor:List[Borough], content:Html)
 
 @main("Community Tool Management System") {
 
 
 <form action="@routes.Application.showUserForm()" method="get">
-        @if(!flash.containsKey("success")){
+        @if(!session.containsKey("user_id")){
             <div>
 
                 <button type="submit" class="btn btn-md btn-link" id="userLogin">
                     Log In
                 </button>
                 Welcome
-
             </div>
         }
 </form>
 
 <form action="@routes.Application.logout()" method="get">
-    @if(flash.containsKey("success")){
+    @if(session.containsKey("user_id")){
     <div>
 
         <button type="submit" class="btn btn-md btn-link" id="logIn">
             Log Out
         </button>
-        Welcome @flash.get("success")
-        <a href="/">Add Tools</a>
-
+        Welcome @session.get(session.get("user_id")) |
+        <a href="/upload">Add Tools</a>
     </div>
     }
 </form>
+
 
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group col-md-9 col-sm-9">

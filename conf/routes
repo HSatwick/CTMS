@@ -9,6 +9,9 @@ POST    /newUser                    controllers.Application.logIn()
 POST    /addUser                    controllers.Application.signUp()
 GET     /logout                     controllers.Application.logout()
 
+GET    /upload                      controllers.Tool.setUpload()
+POST   /uploading                   controllers.Tool.upload()
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

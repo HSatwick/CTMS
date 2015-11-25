@@ -22,7 +22,8 @@ public class Application extends Controller {
     public Result index() {
         List<ToolCategory> tools = ToolCategory.find.all();
         List<Borough> boroughs = Borough.borough.all();
-        return ok(index.render("Community Tool Management System",tools, boroughs,search.render()));
+        //Users users = Users.find.where().eq("user_id",session("user_id")).findUnique();
+        return ok(index.render("",tools, boroughs,search.render()));
     }
 
     public Result showUserForm() {
@@ -53,6 +54,7 @@ public class Application extends Controller {
 
         flash("success", user.getName());
         session("user_id", user.getID());
+        session(user.getID(),user.getName());
 
         return redirect(routes.Application.index());
     }
@@ -67,6 +69,7 @@ public class Application extends Controller {
         if(user != null) {
             if(user.authenticate(user, password)) {
                 session("user_id", user.getID());
+                session(user.getID(),user.getName());
                 flash("success", "back " + user.getName());
             }else{
                 flash("error", "Invalid password.");
@@ -80,6 +83,9 @@ public class Application extends Controller {
     }
 
     public Result logout() {
+        user = session("user_id");
+        session().remove(user);
+        user = "";
         session().remove("user_id");
         return redirect(routes.Application.index());
     }

@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Column;
 import javax.validation.*;
+import org.joda.time.*;
 
 @Table(name="comments")
 @Entity
@@ -23,9 +24,17 @@ public class Comment extends Model {
     public String comment_id;
 
     @Constraints.Required
+    @ManyToOne
     public Users user;
 
     @Constraints.Required
+    @ManyToOne
     public Tools tool;
+
+    @Constraints.Required
+    public String body;
+
+    @Constraints.Required
+    public DateTime datetime_posted;
 
 }

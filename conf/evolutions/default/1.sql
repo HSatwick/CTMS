@@ -38,7 +38,7 @@ create table tools (
   tool_desc                 varchar(255),
   tool_type_cat_id          varchar(255),
   tool_owner_user_id        bigint,
-  borough_bor_id            varchar(255),
+  borough_bor_id            integer,
   available                 integer,
   constraint pk_tools primary key (tool_id))
 ;

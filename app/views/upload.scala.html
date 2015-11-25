@@ -1,0 +1,44 @@
+@(tools:List[ToolCategory],b:List[Borough])
+
+@main("Community Tool Management System - Upload Tools"){
+
+
+    <label><b>Upload Tool</b></label><br>
+    <form action="@routes.Tool.upload()" method="post">
+        <div class="col-md-12 col-sm-12 container-fluid">
+        <div class="form-group">
+            <label for="tool_name">Tool Name</label><br>
+            <input type="text" name="toolName" id="tool_name" size="50">
+        </div>
+        <div class="form-group">
+            <label for="categories">Tool Category</label><br>
+            <select style="height:2.5em; width:150px;" id="categories" name="categories">
+                @for(t <- tools){
+                <option value="@t.cat_id">@t.cat_name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="tool_desc">Tool Description</label><br>
+            <textarea type="text" name="toolDesc" id="tool_desc" rows="4" cols="30" maxlength="140"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="boroughs">Borough</label><br>
+            <select style="height:2.5em; width:150px;" id="boroughs" name="boroughs">
+                @for(bor <- b){
+                <option value="@bor.bor_id">@bor.bor_name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <br>
+            <input class="btn btn-primary" type="submit" value="Upload">
+            <a href="/" class="btn btn-warning">Cancel</a>
+        </div>
+        </div>
+
+    </form>
+
+
+
+}

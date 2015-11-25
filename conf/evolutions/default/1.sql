@@ -4,7 +4,7 @@
 # --- !Ups
 
 create table boroughs (
-  bor_id                    varchar(255) not null,
+  bor_id                    serial not null,
   bor_name                  varchar(255),
   constraint pk_boroughs primary key (bor_id))
 ;

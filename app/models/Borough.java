@@ -21,11 +21,11 @@ import javax.validation.*;
 public class Borough extends Model{
 
     @Id
-    public String bor_id;
+    public Integer bor_id;
 
     @Constraints.Required
     public String bor_name;
 
-    public static Finder<String,Borough> borough = new Finder<String,Borough>(String.class,Borough.class);
+    public static Finder<Integer,Borough> borough = new Finder<Integer,Borough>(Borough.class);
 
 }

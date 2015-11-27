@@ -22,16 +22,18 @@ import java.util.*;
 public class ToolCategory extends Model{
 
     @Id
-    public String cat_id;
+    public Long cat_id;
 
     @Constraints.Required
     public String cat_name;
 
 
-    @OneToMany
+    @ManyToMany
     public List<Tools> consistsOf;
 
 
-    public static Finder<String,ToolCategory> find = new Finder<String,ToolCategory>(String.class,ToolCategory.class);
+    public static Finder<Long,ToolCategory> find = new Finder<Long,ToolCategory>(ToolCategory.class);
+
+
 
 }

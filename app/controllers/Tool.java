@@ -27,6 +27,19 @@ public class Tool extends Controller {
         String cat = userForm.data().get("categories");
         String name = userForm.data().get("toolName");
         String desc = userForm.data().get("toolDesc");
+        ToolCategory toolCategory = ToolCategory.find.where().eq("cat_id", Integer.parseInt(cat)).findUnique();
+
+        Borough borough = Borough.borough.where().eq("bor_id", Integer.parseInt(value)).findUnique();
+
+
+        Users user = Users.find.where().eq("emailAdrs", "d@z.com").findUnique();
+
+
+
+
+        Tools tool = Tools.uploadTool(name, desc, toolCategory, user, borough, 1);
+
+        tool.save();
         return redirect(routes.Application.index());
     }
 

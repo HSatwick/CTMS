@@ -16,7 +16,7 @@ public class UserAuth extends Security.Authenticator {
         String userIdStr = ctx.session().get("user_id");
         if(userIdStr == null) return null;
 
-        Users user = Users.find.byId(userIdStr);
+        Users user = Users.find.byId(Long.parseLong(userIdStr));
         return (user != null ? user.getID() : null);
     }
 

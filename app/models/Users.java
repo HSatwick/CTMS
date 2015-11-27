@@ -34,8 +34,8 @@ public class Users extends Model{
     public String emailAdrs;
 
     @Constraints.Required
-    @Column(unique=true)
     public String password;
+
 
     @OneToMany
     public List<Comment> comments;
@@ -43,9 +43,7 @@ public class Users extends Model{
     @OneToMany
     public List<Borrowed> users_borrowed_tools;
 
-    public static Finder<String,Users> find = new Finder<String,Users>(
-            String.class, Users.class
-    );
+    public static Finder<Long,Users> find = new Finder<Long,Users>( Users.class );
 
     public String getID(){
         return this.user_id.toString();
@@ -54,6 +52,8 @@ public class Users extends Model{
     public String getName(){
         return first_name+" "+last_name;
     }
+
+    public String getEmail(){return emailAdrs;}
 
     public boolean authenticate(Users u, String password) {
         if(u != null){

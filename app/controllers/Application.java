@@ -70,6 +70,7 @@ public class Application extends Controller {
             if(user.authenticate(user, password)) {
                 session("user_id", user.getID());
                 session(user.getID(),user.getName());
+
                 flash("success", "back " + user.getName());
             }else{
                 flash("error", "Invalid password.");

@@ -1,4 +1,4 @@
-@(username: String, tools: List[ToolCategory], bor:List[Borough], content:Html)
+@(username: String, tools: List[ToolCategory], bor:List[Borough], posts: List[Tools])
 
 @main("Community Tool Management System") {
 
@@ -55,5 +55,19 @@
 
         </form>
 <hr>
-@content
+<div>
+
+    @if(posts.isEmpty()) {
+    <h2>No tools available</h2>
+    } else {
+    <h2>Tools List</h2>
+    <ul>
+        @for(t <- posts) {
+        <li>Tool name: @t.tool_name; Description: @t.tool_desc; Type: @t.tool_type.cat_name; Location:@t.borough.bor_name</li>
+        }
+    </ul>
+    }
+
+</div>
+
 }

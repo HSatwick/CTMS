@@ -32,7 +32,7 @@ public class Tool extends Controller {
         Borough borough = Borough.borough.where().eq("bor_id", Integer.parseInt(value)).findUnique();
 
 
-        Users user = Users.find.where().eq("emailAdrs", "d@z.com").findUnique();
+        Users user = Users.find.where().eq("emailAdrs", "z@z.com").findUnique();
 
 
 

@@ -28,7 +28,7 @@ public class ToolCategory extends Model{
     public String cat_name;
 
 
-    @ManyToMany
+    @OneToMany
     public List<Tools> consistsOf;
 
 

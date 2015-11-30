@@ -30,8 +30,8 @@ public class Tools extends Model{
     public String tool_desc;
 
     @Constraints.Required
-    @ManyToMany
-    public List<ToolCategory> tool_type;
+    @ManyToOne
+    public ToolCategory tool_type;
 
     @Constraints.Required
     @ManyToOne
@@ -57,7 +57,7 @@ public class Tools extends Model{
         Tools tool = new Tools();
         tool.tool_name = name;
         tool.tool_desc = desc;
-        tool.tool_type.add(cate);
+        tool.tool_type = cate;
         tool.tool_owner = user;
         tool.borough = borough;
         tool.available = ava;

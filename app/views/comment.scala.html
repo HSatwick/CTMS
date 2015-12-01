@@ -1,0 +1,34 @@
+@(id:Long)
+
+@main("Community Tool Management Systems - Comments"){
+
+    <form action="@routes.Comments.addComment(id)" method="post">
+
+        <div class="col-md-12 col-sm-12 container-fluid">
+            <div class="container">
+                <p><b>Comment</b></p>
+            </div>
+            <div class="form-group">
+                <label for="commentTitle"><b>Title</b></label><br>
+                <input type="text" name="commentTitle" id="commentTitle" size="50">
+            </div>
+
+            <div class="form-group">
+                <label for="comment_body">Description</label><br>
+                <textarea type="text" name="comment_body" id="comment_body" rows="4" cols="30" maxlength="140"></textarea>
+            </div>
+
+            <div class="form-group">
+                <br>
+                <input class="btn btn-primary" type="submit" value="Submit">
+            </div>
+
+        </div>
+
+    </form>
+
+
+}
+
+
+

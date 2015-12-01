@@ -36,6 +36,7 @@ create table tools (
   tool_id                   bigserial not null,
   tool_name                 varchar(255),
   tool_desc                 varchar(255),
+  tool_type_cat_id          bigint,
   tool_owner_user_id        bigint,
   borough_bor_id            integer,
   available                 integer,
@@ -58,12 +59,6 @@ create table categories_tools (
   tools_tool_id                  bigint not null,
   constraint pk_categories_tools primary key (categories_cat_id, tools_tool_id))
 ;
-
-create table tools_categories (
-  tools_tool_id                  bigint not null,
-  categories_cat_id              bigint not null,
-  constraint pk_tools_categories primary key (tools_tool_id, categories_cat_id))
-;
 alter table borrowed add constraint fk_borrowed_users_1 foreign key (users_user_id) references users (user_id);
 create index ix_borrowed_users_1 on borrowed (users_user_id);
 alter table borrowed add constraint fk_borrowed_tools_2 foreign key (tools_tool_id) references tools (tool_id);
@@ -72,20 +67,18 @@ alter table comments add constraint fk_comments_user_3 foreign key (user_user_id
 create index ix_comments_user_3 on comments (user_user_id);
 alter table comments add constraint fk_comments_tool_4 foreign key (tool_tool_id) references tools (tool_id);
 create index ix_comments_tool_4 on comments (tool_tool_id);
-alter table tools add constraint fk_tools_tool_owner_5 foreign key (tool_owner_user_id) references users (user_id);
-create index ix_tools_tool_owner_5 on tools (tool_owner_user_id);
-alter table tools add constraint fk_tools_borough_6 foreign key (borough_bor_id) references boroughs (bor_id);
-create index ix_tools_borough_6 on tools (borough_bor_id);
+alter table tools add constraint fk_tools_tool_type_5 foreign key (tool_type_cat_id) references categories (cat_id);
+create index ix_tools_tool_type_5 on tools (tool_type_cat_id);
+alter table tools add constraint fk_tools_tool_owner_6 foreign key (tool_owner_user_id) references users (user_id);
+create index ix_tools_tool_owner_6 on tools (tool_owner_user_id);
+alter table tools add constraint fk_tools_borough_7 foreign key (borough_bor_id) references boroughs (bor_id);
+create index ix_tools_borough_7 on tools (borough_bor_id);
 
 
 
 alter table categories_tools add constraint fk_categories_tools_categorie_01 foreign key (categories_cat_id) references categories (cat_id);
 
 alter table categories_tools add constraint fk_categories_tools_tools_02 foreign key (tools_tool_id) references tools (tool_id);
-
-alter table tools_categories add constraint fk_tools_categories_tools_01 foreign key (tools_tool_id) references tools (tool_id);
-
-alter table tools_categories add constraint fk_tools_categories_categorie_02 foreign key (categories_cat_id) references categories (cat_id);
 
 # --- !Downs
 
@@ -100,8 +93,6 @@ drop table if exists categories cascade;
 drop table if exists categories_tools cascade;
 
 drop table if exists tools cascade;
-
-drop table if exists tools_categories cascade;
 
 drop table if exists users cascade;
 

@@ -22,7 +22,6 @@ public class Application extends Controller {
     public Result index() {
         List<ToolCategory> tools = ToolCategory.find.all();
         List<Borough> boroughs = Borough.borough.all();
-        //Users users = Users.find.where().eq("user_id",session("user_id")).findUnique();
         return ok(index.render("",tools, boroughs,search.render()));
     }
 

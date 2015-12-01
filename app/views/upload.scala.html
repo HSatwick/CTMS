@@ -12,7 +12,13 @@
         </div>
         <div class="form-group">
             <label for="categories">Tool Category</label><br>
-            <select style="height:2.5em; width:150px;" id="categories" name="categories">
+            <!--
+            <label class="checkbox-inline"><input type="checkbox"
+            value="" name="categories">@for(t <- tools){
+            <option value="@t.cat_id">@t.cat_name</option>
+            }</label>
+-->
+           <select style="height:2.5em; width:150px;" id="categories" name="categories">
                 @for(t <- tools){
                 <option value="@t.cat_id">@t.cat_name</option>
                 }

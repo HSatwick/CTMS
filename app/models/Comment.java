@@ -21,7 +21,7 @@ import org.joda.time.*;
 public class Comment extends Model {
 
     @Id
-    public String comment_id;
+    public Long comment_id;
 
     @Constraints.Required
     @ManyToOne
@@ -36,5 +36,7 @@ public class Comment extends Model {
 
     @Constraints.Required
     public DateTime datetime_posted;
+
+    public static Finder<Long,Comment> find_Comments = new Finder<Long,Comment>(Comment.class);
 
 }

@@ -12,31 +12,31 @@ create table boroughs (
 create table borrowed (
   id                        varchar(255) not null,
   users_user_id             bigint,
-  tools_tool_id             varchar(255),
+  tools_tool_id             bigint,
   duration                  timestamp,
   constraint pk_borrowed primary key (id))
 ;
 
 create table comments (
-  comment_id                varchar(255) not null,
+  comment_id                bigserial not null,
   user_user_id              bigint,
-  tool_tool_id              varchar(255),
+  tool_tool_id              bigint,
   body                      varchar(255),
   datetime_posted           timestamp,
   constraint pk_comments primary key (comment_id))
 ;
 
 create table categories (
-  cat_id                    varchar(255) not null,
+  cat_id                    bigserial not null,
   cat_name                  varchar(255),
   constraint pk_categories primary key (cat_id))
 ;
 
 create table tools (
-  tool_id                   varchar(255) not null,
+  tool_id                   bigserial not null,
   tool_name                 varchar(255),
   tool_desc                 varchar(255),
-  tool_type_cat_id          varchar(255),
+  tool_type_cat_id          bigint,
   tool_owner_user_id        bigint,
   borough_bor_id            integer,
   available                 integer,
@@ -50,7 +50,6 @@ create table users (
   email_adrs                varchar(255),
   password                  varchar(255),
   constraint uq_users_email_adrs unique (email_adrs),
-  constraint uq_users_password unique (password),
   constraint pk_users primary key (user_id))
 ;
 

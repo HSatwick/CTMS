@@ -20,10 +20,9 @@ public class Application extends Controller {
     public static String status = "Sign In", newStatus = "Logout";
 
     public Result index() {
-        List<ToolCategory> tools = ToolCategory.find.all();
+        List<ToolCategory> toolCar = ToolCategory.find.all();
         List<Borough> boroughs = Borough.borough.all();
-        //Users users = Users.find.where().eq("user_id",session("user_id")).findUnique();
-        return ok(index.render("",tools, boroughs,search.render()));
+        return ok(index.render("",toolCar, boroughs, search.render()));
     }
 
     public Result showUserForm() {
@@ -36,6 +35,7 @@ public class Application extends Controller {
         String lastName = userForm.data().get("last_name");
         String username = userForm.data().get("emailAdrs");
         String password = userForm.data().get("password");
+
 
         Users user = Users.createNewUser(firstName, lastName, username, password);
 
@@ -70,6 +70,7 @@ public class Application extends Controller {
             if(user.authenticate(user, password)) {
                 session("user_id", user.getID());
                 session(user.getID(),user.getName());
+
                 flash("success", "back " + user.getName());
             }else{
                 flash("error", "Invalid password.");

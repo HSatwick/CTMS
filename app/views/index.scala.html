@@ -1,4 +1,4 @@
-@(username: String, tools: List[ToolCategory], bor:List[Borough], content:Html)
+@(username: String, tools: List[ToolCategory], bor:List[Borough], content: Html)
 
 @main("Community Tool Management System") {
 
@@ -23,26 +23,27 @@
             Log Out
         </button>
         Welcome @session.get(session.get("user_id")) |
-        <a href="/upload">Add Tools</a>
+        <a href="/upload">Add Tools</a> |
+        <a href="#">Current Borrowed</a>
     </div>
     }
 </form>
 
 
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group col-md-9 col-sm-9">
-                <input type="search" class="form-control" placeholder="Search" size="130">
+        <form class="navbar-form" role="search" action="@routes.Search.search()" method="get">
+            <div class="form-group col-md-6 col-sm-6">
+                <input type="search" class="form-control" name="search" placeholder="Search" size="80">
             </div>
-            <div class="btn-group col-md-1 col-sm-1" id="categories">
-                <select style="height:2.5em; width:100px;">
+            <div class="btn-group col-md-2 col-sm-2" id="categories">
+                <select style="height:2.5em;" name="categories">
                     <option value="">All Tools</option>
                     @for(t <- tools){
                     <option value="@t.cat_id">@t.cat_name</option>
                     }
                 </select>
             </div>
-            <div class="btn-group col-md-1 col-sm-1" id="boroughs">
-                <select style="height:2.5em; width:100px;">
+            <div class="btn-group col-md-2 col-sm-2" id="boroughs">
+                <select style="height:2.5em;" name="borough">
                     <option value="">All Borough</option>
                     @for(b <- bor){
                     <option value="@b.bor_id">@b.bor_name</option>
@@ -52,11 +53,14 @@
             <div class="col-md-1 col-sm-1">
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
+            <div class="col-md-1 col-sm-1">
+                <a href="/" class="btn btn-warning">Reset</a>
+            </div>
 
         </form>
 <hr>
+<br>
 <div id="listing" class="container">
     @content
 </div>
-
 }

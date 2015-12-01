@@ -20,9 +20,9 @@ public class Application extends Controller {
     public static String status = "Sign In", newStatus = "Logout";
 
     public Result index() {
-        List<ToolCategory> tools = ToolCategory.find.all();
+        List<ToolCategory> toolCar = ToolCategory.find.all();
         List<Borough> boroughs = Borough.borough.all();
-        return ok(index.render("",tools, boroughs,search.render()));
+        return ok(index.render("",toolCar, boroughs, search.render()));
     }
 
     public Result showUserForm() {
@@ -35,6 +35,7 @@ public class Application extends Controller {
         String lastName = userForm.data().get("last_name");
         String username = userForm.data().get("emailAdrs");
         String password = userForm.data().get("password");
+
 
         Users user = Users.createNewUser(firstName, lastName, username, password);
 

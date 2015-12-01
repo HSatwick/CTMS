@@ -31,7 +31,6 @@ public class Tool extends Controller {
 
         Borough borough = Borough.borough.where().eq("bor_id", Integer.parseInt(value)).findUnique();
 
-
         Users user = Users.find.where().eq("user_id", Long.parseLong(session("user_id"))).findUnique();
 
         Tools tool = Tools.uploadTool(name, desc, toolCategory, user, borough, 1);

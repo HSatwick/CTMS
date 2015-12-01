@@ -1,0 +1,22 @@
+@(id:Long, t:Tools, c:List[Comment])
+
+@main(""){
+
+    <div>
+        Tool: @t.tool_name<br>
+        <p>
+            @for(cc<-c){
+                User: @cc.user.getName() <i>@cc.user.emailAdrs</i><br>
+                Posted: @cc.datetime_posted<br>
+                Comment:<br>
+                @cc.body
+                <br>
+            }
+        </p>
+        @if(session.containsKey("user_id")){
+            <a href="/borrowTool/@t.tool_id" class="btn btn-primary">Borrow Tool</a> |
+        }
+        <a href="/" class="btn btn-warning">Back</a>
+    </div>
+
+}

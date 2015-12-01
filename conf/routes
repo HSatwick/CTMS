@@ -12,8 +12,13 @@ GET     /logout                     controllers.Application.logout()
 GET    /upload                      controllers.Tool.setUpload()
 POST   /uploading                   controllers.Tool.upload()
 
-GET    /commentUI/:id              controllers.Comments.getCommentUI(id:Long)
-POST   /addComments/:id              controllers.Comments.addComment(id:Long)
+GET    /commentUI/:id               controllers.Comments.getCommentUI(id:Long)
+GET    /displayCmt/:id              controllers.Comments.showCommentUI(id:Long)
+POST   /addComments/:id             controllers.Comments.addComment(id:Long)
+
+
+GET    /search                      controllers.Search.search()
+
 
 
 # Map static resources from the /public folder to the /assets URL path

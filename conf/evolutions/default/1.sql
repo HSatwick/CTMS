@@ -18,7 +18,7 @@ create table borrowed (
 ;
 
 create table comments (
-  comment_id                varchar(255) not null,
+  comment_id                bigserial not null,
   user_user_id              bigint,
   tool_tool_id              bigint,
   body                      varchar(255),
@@ -53,12 +53,6 @@ create table users (
   constraint pk_users primary key (user_id))
 ;
 
-
-create table categories_tools (
-  categories_cat_id              bigint not null,
-  tools_tool_id                  bigint not null,
-  constraint pk_categories_tools primary key (categories_cat_id, tools_tool_id))
-;
 alter table borrowed add constraint fk_borrowed_users_1 foreign key (users_user_id) references users (user_id);
 create index ix_borrowed_users_1 on borrowed (users_user_id);
 alter table borrowed add constraint fk_borrowed_tools_2 foreign key (tools_tool_id) references tools (tool_id);
@@ -76,10 +70,6 @@ create index ix_tools_borough_7 on tools (borough_bor_id);
 
 
 
-alter table categories_tools add constraint fk_categories_tools_categorie_01 foreign key (categories_cat_id) references categories (cat_id);
-
-alter table categories_tools add constraint fk_categories_tools_tools_02 foreign key (tools_tool_id) references tools (tool_id);
-
 # --- !Downs
 
 drop table if exists boroughs cascade;
@@ -89,8 +79,6 @@ drop table if exists borrowed cascade;
 drop table if exists comments cascade;
 
 drop table if exists categories cascade;
-
-drop table if exists categories_tools cascade;
 
 drop table if exists tools cascade;
 

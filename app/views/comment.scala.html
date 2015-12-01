@@ -1,4 +1,4 @@
-@(id:Long)
+@(id:Long, t:Tools)
 
 @main("Community Tool Management Systems - Comments"){
 
@@ -9,8 +9,7 @@
                 <p><b>Comment</b></p>
             </div>
             <div class="form-group">
-                <label for="commentTitle"><b>Title</b></label><br>
-                <input type="text" name="commentTitle" id="commentTitle" size="50">
+                Comment for Tool: @t.tool_name
             </div>
 
             <div class="form-group">
@@ -21,6 +20,7 @@
             <div class="form-group">
                 <br>
                 <input class="btn btn-primary" type="submit" value="Submit">
+                <a href="/" class="btn btn-warning">Cancel</a>
             </div>
 
         </div>

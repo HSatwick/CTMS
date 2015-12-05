@@ -25,7 +25,7 @@ public class Comments extends Controller{
 
     public Result getCommentUI(Long id){
         Tools t = Tools.find_tools.where().eq("tool_id",id).findUnique();
-        return ok(comment.render(id,t));
+        return ok(comment.render(id,t,Search.search,Search.borough,Search.categories));
     }
 
     public Result addComment(Long id){
@@ -46,7 +46,7 @@ public class Comments extends Controller{
     public Result showCommentUI(Long id){
         Tools t = Tools.find_tools.where().eq("tool_id",id).findUnique();
         List<Comment> comm = Comment.find_Comments.where().eq("tool",t).findList();
-        return ok(displayComment.render(id,t,comm));
+        return ok(displayComment.render(id,t,comm,Search.search,Search.categories,Search.borough));
     }
 
 }

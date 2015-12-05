@@ -1,4 +1,4 @@
-@(id:Long, t:Tools, c:List[Comment])
+@(id:Long, t:Tools, c:List[Comment], search:String, categories:String, borough:String)
 
 @main(""){
 
@@ -11,12 +11,13 @@
                 Comment:<br>
                 @cc.body
                 <br>
+                <br>
             }
         </p>
         @if(session.containsKey("user_id")){
             <a href="/borrowTool/@t.tool_id" class="btn btn-primary">Borrow Tool</a> |
         }
-        <a href="/" class="btn btn-warning">Back</a>
+        <a href="/search?search=@search&categories=@categories&borough=@borough" class="btn btn-warning">Back</a>
     </div>
 
 }

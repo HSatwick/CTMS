@@ -1,4 +1,4 @@
-@(id:Long, t:Tools)
+@(id:Long, t:Tools, search:String, borough:String, categories:String)
 
 @main("Community Tool Management Systems - Comments"){
 
@@ -20,7 +20,7 @@
             <div class="form-group">
                 <br>
                 <input class="btn btn-primary" type="submit" value="Submit">
-                <a href="/" class="btn btn-warning">Cancel</a>
+                <a href="/search?search=@search&categories=@categories&borough=@borough" class="btn btn-warning">Cancel</a>
             </div>
 
         </div>

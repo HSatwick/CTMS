@@ -1,0 +1,25 @@
+@(tools:List[Tools])
+
+
+
+
+<div>
+    @for(t <- tools){
+    <p>
+        Tool: @t.tool_name
+    </p>
+    <p>
+
+        Category: @t.tool_type.cat_name | Borough: @t.borough.bor_name
+    </p>
+    <p>
+        @if(session.containsKey("user_id")){
+        <a href="/commentUI/@t.tool_id">Write Comment</a> |
+        }
+        <a href="/displayCmt/@t.tool_id">Display Comments</a>
+    </p>
+    }
+</div>
+
+
+

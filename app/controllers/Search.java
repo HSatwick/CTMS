@@ -57,4 +57,21 @@ public class Search extends Controller {
             return ok(index.render("", toolCar, boroughs, display.render(tool)));
         }
     }
+
+    public Result inventory(){
+        List<ToolCategory> toolCar = ToolCategory.find.all();
+        List<Borough> boroughs = Borough.borough.all();
+        List<Tools> tool = Tools.find_tools.where().eq("tool_owner_user_id", Long.parseLong(session("user_id"))).findList();
+        return ok(index.render("", toolCar, boroughs, displayInventory.render(tool)));
+    }
+
+
+    public Result currentBorrow(){
+        List<ToolCategory> toolCar = ToolCategory.find.all();
+        List<Borough> boroughs = Borough.borough.all();
+        List<Tools> tool = Tools.find_tools.where().eq("tool_borrower_user_id", Long.parseLong(session("user_id"))).findList();
+        return ok(index.render("", toolCar, boroughs, displayCurrentBorrow.render(tool)));
+    }
+
+
 }

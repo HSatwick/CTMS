@@ -10,10 +10,9 @@ create table boroughs (
 ;
 
 create table borrowed (
-  id                        varchar(255) not null,
+  id                        serial not null,
   users_user_id             bigint,
   tools_tool_id             bigint,
-  duration                  timestamp,
   constraint pk_borrowed primary key (id))
 ;
 
@@ -40,6 +39,7 @@ create table tools (
   tool_owner_user_id        bigint,
   borough_bor_id            integer,
   available                 integer,
+  tool_borrower_user_id     bigint,
   constraint pk_tools primary key (tool_id))
 ;
 
@@ -67,6 +67,8 @@ alter table tools add constraint fk_tools_tool_owner_6 foreign key (tool_owner_u
 create index ix_tools_tool_owner_6 on tools (tool_owner_user_id);
 alter table tools add constraint fk_tools_borough_7 foreign key (borough_bor_id) references boroughs (bor_id);
 create index ix_tools_borough_7 on tools (borough_bor_id);
+alter table tools add constraint fk_tools_tool_borrower_8 foreign key (tool_borrower_user_id) references users (user_id);
+create index ix_tools_tool_borrower_8 on tools (tool_borrower_user_id);
 
 
 

@@ -18,8 +18,11 @@ POST   /addComments/:id             controllers.Comments.addComment(id:Long)
 
 
 GET    /search                      controllers.Search.search()
+GET    /inventory                   controllers.Search.inventory()
+GET    /currentBorrow               controllers.Search.currentBorrow()
 
-
+POST   /borrow/:id                  controllers.Tool.borrow(id:Long)
+POST   /return/:id                  controllers.Tool.returnTool(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

@@ -22,7 +22,7 @@ import java.util.*;
 public class Borrowed extends Model {
 
     @Id
-    public String id;
+    public int id;
 
     @Constraints.Required
     @ManyToOne
@@ -32,7 +32,15 @@ public class Borrowed extends Model {
     @ManyToOne
     public Tools tools;
 
-    @Constraints.Required
-    public DateTime duration;
+    public static Finder<Integer,Borrowed> borrowed = new Finder<Integer,Borrowed>(Borrowed.class);
 
+
+    public static Borrowed borrowedTool(Users user, Tools tools){
+        Borrowed borrow = new Borrowed();
+
+        borrow.users = user;
+        borrow.tools = tools;
+
+        return borrow;
+    }
 }

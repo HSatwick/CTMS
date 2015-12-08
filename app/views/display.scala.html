@@ -4,6 +4,7 @@
 
 
     <div>
+        @if(!tools.isEmpty()){
         @for(t <- tools){
             <p>
                 Tool: @t.tool_name
@@ -11,12 +12,23 @@
             <p>
                 Owner: @t.tool_owner.getName() | Category: @t.tool_type.cat_name | Borough: @t.borough.bor_name
             </p>
+
             <p>
+
                 @if(session.containsKey("user_id")){
-                    <a href="/commentUI/@t.tool_id">Write Comment</a> |
-                    <a href="/borrowTool/@t.tool_id">Borrow Tool</a> |
+                    <a class="btn btn-primary" href="/commentUI/@t.tool_id" role="button">Write Comment</a> |
+                    <form action="@routes.Tool.borrow(t.tool_id)" method="post">
+                        <button class="btn btn-primary" type="submit">Borrow Tool</button>|
+                    </form>
+
+               <!-- <a class="btn btn-primary" href="/borrowTool/@t.tool_id" role="button">Borrow Tool</a> |-->
                 }
-                <a href="/displayCmt/@t.tool_id">Display Comments</a>
+                <a class="btn btn-primary" href="/displayCmt/@t.tool_id" role="button">Display Comments</a>
+            </p>
+        }
+        }else{
+            <p class="alert alert-danger">
+                No tools found
             </p>
         }
     </div>

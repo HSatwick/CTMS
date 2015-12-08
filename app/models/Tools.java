@@ -50,6 +50,8 @@ public class Tools extends Model{
     @Constraints.Required
     public int available; //1 - not borrowed, 0 - borrowed
 
+    @ManyToOne
+    public Users tool_borrower;
 
     public static Finder<Long,Tools> find_tools = new Finder<Long,Tools>(Tools.class);
 

@@ -46,4 +46,25 @@ public class Tool extends Controller {
     }
 
 
+    public Result borrow(long toolid){
+        Tools tool = Tools.find_tools.where().eq("tool_id", toolid).findUnique();
+        tool.available = 0;
+        Users borrower = Users.find.where().eq("user_id", Long.parseLong(session("user_id"))).findUnique();
+        tool.tool_borrower = borrower;
+        tool.update();
+
+        Users user = Users.find.where().eq("user_id", Long.parseLong(session("user_id"))).findUnique();
+        Borrowed borrow = Borrowed.borrowedTool(user, tool);
+        borrow.save();
+        return redirect(routes.Application.index());
+    }
+
+    public Result returnTool(long toolid){
+        Tools tool = Tools.find_tools.where().eq("tool_id", toolid).findUnique();
+        tool.available = 1;
+        tool.tool_borrower = null;
+        tool.update();
+
+        return redirect(routes.Application.index());
+    }
 }

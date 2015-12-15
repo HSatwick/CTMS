@@ -13,7 +13,7 @@
                 Welcome
             </div>
         }
-</form>
+    </form>
 
 <form action="@routes.Application.logout()" method="get">
     @if(session.containsKey("user_id")){
@@ -30,10 +30,10 @@
     }
 </form>
 
-
+<div class=" form-group col-md-12 col-sm-12">
         <form class="navbar-form" role="search" action="@routes.Search.search()" method="get">
             <div class="form-group col-md-6 col-sm-6">
-                <input type="search" class="form-control" name="search" placeholder="Search" size="80">
+                <input type="search" class="form-control" name="search" placeholder="Search" style="width:100%">
             </div>
             <div class="btn-group col-md-2 col-sm-2" id="categories">
                 <select style="height:2.5em;" name="categories">
@@ -59,6 +59,7 @@
             </div>
 
         </form>
+</div>
 <hr>
 <br>
 <div id="listing" class="container">

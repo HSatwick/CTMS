@@ -12,21 +12,19 @@
             <p>
                 Owner: @t.tool_owner.getName() | Category: @t.tool_type.cat_name | Borough: @t.borough.bor_name
             </p>
-        @if(session.containsKey("user_id")){
         <form class="form-inline" action="@routes.Tool.borrow(t.tool_id)" method="post">
             <p>
 
-
+                @if(session.containsKey("user_id")){
                     <a class="btn btn-primary" href="/commentUI/@t.tool_id" role="button">Write Comment</a> |
 
                         <button class="btn btn-primary" type="submit">Borrow Tool</button>|
-
+                }
 
                <!-- <a class="btn btn-primary" href="/borrowTool/@t.tool_id" role="button">Borrow Tool</a> |-->
                 <a class="btn btn-primary" href="/displayCmt/@t.tool_id" role="button">Display Comments</a>
             </p>
         </form>
-        }
         }
         }else{
             <p class="alert alert-danger">

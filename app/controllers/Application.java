@@ -25,6 +25,10 @@ public class Application extends Controller {
         return ok(index.render("",toolCar, boroughs, search.render()));
     }
 
+    public Result aboutus(){
+        return ok(aboutus.render(Search.search,Search.categories, Search.borough));
+    }
+
     public Result showUserForm() {
         return ok(user_login.render("Community Tool Management System"));
     }

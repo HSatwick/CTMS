@@ -26,7 +26,7 @@ public class Application extends Controller {
     }
 
     public Result aboutus(){
-        return ok(aboutus.render(Search.search,Search.categories, Search.borough));
+        return ok(aboutus.render());
     }
 
     public Result showUserForm() {

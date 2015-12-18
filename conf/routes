@@ -4,7 +4,6 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /aboutUs                    controllers.Application.aboutus()
 GET     /user_login                 controllers.Application.showUserForm()
 POST    /newUser                    controllers.Application.logIn()
 POST    /addUser                    controllers.Application.signUp()

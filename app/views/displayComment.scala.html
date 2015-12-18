@@ -16,7 +16,7 @@
         </p>
         <form class="form-inline" action="@routes.Tool.borrow(t.tool_id)" method="post">
             @if(session.containsKey("user_id") && t.available == 1){
-                <input type="submit" class="btn btn-primary">Borrow Tool</input> |
+                <input type="submit" class="btn btn-primary" value="Borrow Tool">
             }
             <a href="/search?search=@search&categories=@categories&borough=@borough" class="btn btn-warning">Back</a>
         </form>

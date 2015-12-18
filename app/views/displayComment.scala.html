@@ -15,7 +15,7 @@
             }
         </p>
         @if(session.containsKey("user_id") && t.available == 1){
-            <a href="/borrowTool/@t.tool_id" class="btn btn-primary">Borrow Tool</a> |
+            <a href="/borrow/@t.tool_id" class="btn btn-primary">Borrow Tool</a> |
         }
         <a href="/search?search=@search&categories=@categories&borough=@borough" class="btn btn-warning">Back</a>
     </div>

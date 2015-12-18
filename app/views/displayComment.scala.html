@@ -14,10 +14,12 @@
                 <br>
             }
         </p>
-        @if(session.containsKey("user_id") && t.available == 1){
-            <a href="/borrow/@t.tool_id" class="btn btn-primary">Borrow Tool</a> |
-        }
-        <a href="/search?search=@search&categories=@categories&borough=@borough" class="btn btn-warning">Back</a>
+        <form class="form-inline" action="@routes.Tool.borrow(t.tool_id)" method="post">
+            @if(session.containsKey("user_id") && t.available == 1){
+                <input type="submit" class="btn btn-primary">Borrow Tool</input> |
+            }
+            <a href="/search?search=@search&categories=@categories&borough=@borough" class="btn btn-warning">Back</a>
+        </form>
     </div>
 
 }

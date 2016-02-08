@@ -183,7 +183,7 @@ public class Application extends Controller {
                 String title = "Link to Renew your password for Community Tool Management Systems";
                 String content = "Dear "+user.getName()+",<br><br>";
                 content += "Click on the following link to reset your password.<br>";
-                content += "<a href='https://mysterious-atoll-4309.herokuapp.com/"+emailHash+"'>Change Password</a><br>";
+                content += "<a href='https://mysterious-atoll-4309.herokuapp.com/newpass/"+emailHash+"'>Change Password</a><br>";
                 content += "<br><br>This link is only valid for 24 hours.<br><br>";
                 content += "Sincerely,<br><br>CTMS - Community Tool Management Systems";
                 connect_save_send(emailAddress,content,title);

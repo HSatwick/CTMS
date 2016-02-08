@@ -64,7 +64,7 @@ public class Users extends Model{
     }
 
     public static Users createNewUser(String fn, String ln, String username, String password) {
-        if(password == null || username == null || password.length() < 8) {
+        if(password == null || username == null || (password.trim().length() < 8 && username.trim().equals(""))) {
             return null;
         }
 
@@ -78,5 +78,10 @@ public class Users extends Model{
         user.password = passwordHash;
 
         return user;
+    }
+
+    public static String encrypePassword(String password){
+        String passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+        return passwordHash;
     }
 }

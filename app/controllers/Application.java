@@ -179,7 +179,7 @@ public class Application extends Controller {
             Users user = Users.find.where().eq("emailAdrs", emailAddress).findUnique();
             if(user != null){
                 String emailHash = Users.encrypePassword(emailAddress);
-                emailHash = emailHash.replace("\\/","");
+                emailHash = emailHash.replaceAll("\\/","");
                 String title = "Link to Renew your password for Community Tool Management Systems";
                 String content = "Dear "+user.getName()+",<br><br>";
                 content += "Click on the following link to reset your password.<br>";

@@ -63,7 +63,7 @@ public class Application extends Controller {
         properties.put("mail.smtp.port", "587");
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("communitytoolssharing@gmail.com", "ctms2016");
+                return new PasswordAuthentication("communitytoolssharing@gmail.com", "");
             }
         });
         try{

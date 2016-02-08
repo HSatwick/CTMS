@@ -25,6 +25,14 @@ create table comments (
   constraint pk_comments primary key (comment_id))
 ;
 
+create table passwordresetrequest (
+  pass_id                   serial not null,
+  user_email                varchar(255),
+  datetime_requested        timestamp,
+  hashed_email              varchar(255),
+  constraint pk_passwordresetrequest primary key (pass_id))
+;
+
 create table categories (
   cat_id                    bigserial not null,
   cat_name                  varchar(255),
@@ -79,6 +87,8 @@ drop table if exists boroughs cascade;
 drop table if exists borrowed cascade;
 
 drop table if exists comments cascade;
+
+drop table if exists passwordresetrequest cascade;
 
 drop table if exists categories cascade;
 

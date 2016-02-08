@@ -4,10 +4,14 @@
 
 # Home page
 GET     /                           controllers.Application.index()
+GET 	/newpass/:code 				controllers.Application.obtainUrl(code:String)
+POST 	/submitPass/:code			controllers.Application.submitPassword(code:String)
 GET     /user_login                 controllers.Application.showUserForm()
 POST    /newUser                    controllers.Application.logIn()
 POST    /addUser                    controllers.Application.signUp()
 GET     /logout                     controllers.Application.logout()
+GET 	/forgot_password			controllers.Application.forgotPassword()
+POST 	/reseting					controllers.Application.resetPasswordRequest()
 
 GET    /upload                      controllers.Tool.setUpload()
 POST   /uploading                   controllers.Tool.upload()

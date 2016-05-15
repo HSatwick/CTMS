@@ -47,6 +47,9 @@ public class Tools extends Model{
     @OneToMany
     public List<Borrowed> tools_borrowedBy_users;
 
+    @OneToMany
+    public List<Request_Tool> tools_requested;
+
     @Constraints.Required
     public int available; //1 - not borrowed, 0 - borrowed
 
@@ -67,7 +70,6 @@ public class Tools extends Model{
         return tool;
 
     }
-
 
 
 }

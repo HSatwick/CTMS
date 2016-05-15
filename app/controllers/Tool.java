@@ -45,17 +45,19 @@ public class Tool extends Controller {
         return ok(upload.render(tool,borough));
     }
 
-
     public Result borrow(long toolid){
-        Tools tool = Tools.find_tools.where().eq("tool_id", toolid).findUnique();
+        Request_Tool rt = Request_Tool.updates(toolid, 1);
+
+        Tools tool = Tools.find_tools.where().eq("tool_id", rt.tools.tool_id).findUnique();
         tool.available = 0;
-        Users borrower = Users.find.where().eq("user_id", Long.parseLong(session("user_id"))).findUnique();
+        Users borrower = Users.find.where().eq("user_id", rt.user.user_id).findUnique();
         tool.tool_borrower = borrower;
         tool.update();
 
-        Users user = Users.find.where().eq("user_id", Long.parseLong(session("user_id"))).findUnique();
+        Users user = Users.find.where().eq("user_id", rt.user.user_id).findUnique();
         Borrowed borrow = Borrowed.borrowedTool(user, tool);
         borrow.save();
+        rt.delete();
         return redirect(routes.Application.index());
     }
 
@@ -64,6 +66,10 @@ public class Tool extends Controller {
         tool.available = 1;
         tool.tool_borrower = null;
         tool.update();
+
+        Borrowed returned = Borrowed.borrowed.where().eq("active",1).eq("tools",tool).findUnique();
+        returned.active = 0;
+        returned.update();
 
         return redirect(routes.Application.index());
     }

@@ -1,0 +1,79 @@
+@(t:Tools, comments:List[Comment], borrowed:Integer, votes:Integer, reqCode:Integer, withdraw:Request_Tool)
+
+@main("Community Tool Management System - Tool"){
+
+<div>
+<h2>@t.tool_name</h2>
+<h4>@t.borough.bor_name</h4>
+<h4>@t.tool_type.cat_name</h4>
+<h6>@t.tool_owner.getName()</h6>
+<p>
+    <h6>@t.tool_desc</h6>
+</p>
+
+<p>
+	
+		<p>
+		@if(session.containsKey("user_id") && borrowed == 1){
+            <p>
+                <div class="row">
+                    <div class="col-sm-1">
+                    <form action="/votingTool/@t.tool_id/voting/2" method="post">
+                        <button class="label label-success"><b>^</b></button>
+                    </form>
+                    </div>
+                    <div class="col-sm-1">
+                    <b>@votes</b>
+                    </div>
+                    <div class="col-sm-1">
+                    <form action="/votingTool/@t.tool_id/voting/1" method="post">
+                    <button class="label label-danger"><b>v</b></button>
+                    </form>
+                </div>
+                </div>
+            </p>
+			<a class="label label-primary" href="/commentUI/@t.tool_id" role="button">Write Comment</a>
+		}else{
+            <p>
+                <label class="label label-success" disabled><b>^</b></label>
+                <b>@votes</b>
+                <label class="label label-danger" disabled><b>v</b></label>
+            </p>
+        }
+		@if(session.containsKey("user_id") && reqCode == -1){
+        <form action="@routes.Request_Borrow.tool_requested(t.tool_id)" method="post">
+			<button class="label label-primary" type="submit">Borrow Request</button>
+        </form>
+		}
+
+               <!-- <a class="btn btn-primary" href="/borrowTool/@t.tool_id" role="button">Borrow Tool</a> |-->
+    
+        @if(session.containsKey("user_id") && reqCode == 0){
+        <form action="@routes.Request_Borrow.request_withdraw(withdraw.request_tool_id)" method="post">
+            <button class="label label-primary" type="submit">Withdraw Request</button>
+        </form>
+        }
+        <br>
+        <a href="\search?search=&categories=&borough=" class="label label-warning">Back</a>
+    <hr>
+        <p><h5>Comments</h5><p>
+        <br>
+        <p>
+            @if(comments.size() == 0){
+                <p class="alert alert-danger">There are no comments at this moment on this tool.</label>
+            }
+            @for(cc<-comments){
+                User: @cc.user.getName() <i>@cc.user.emailAdrs</i><br>
+                Posted: @cc.datetime_posted<br>
+                Comment:<br>
+                @cc.body
+                <br>
+                <hr>
+                <br>
+            }
+        </p>
+        </p>
+</p>
+</div>
+
+}

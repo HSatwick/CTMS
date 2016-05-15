@@ -26,16 +26,16 @@ public class PasswordResetRequest extends Model{
     public DateTime datetime_requested;
 
     @Constraints.Required
-    public String hashedEmail;
+    public Long token;
 
     public static Finder<Integer,PasswordResetRequest> passresreq = new Finder<Integer,PasswordResetRequest>(PasswordResetRequest.class);
 
 
-    public static PasswordResetRequest requestSubmitted(String email, String hashed){
+    public static PasswordResetRequest requestSubmitted(String email, Long hashed){
     	PasswordResetRequest prr = new PasswordResetRequest();
     	prr.user_email = email;
     	prr.datetime_requested = new DateTime();
-    	prr.hashedEmail = hashed;
+    	prr.token = hashed;
     	return prr;
     }
 

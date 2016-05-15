@@ -1,0 +1,56 @@
+@(incoming:HashMap[Integer, Request_Tool], outgoing:HashMap[Integer, Request_Tool])
+
+@main("Community Tool Management System - Request Tool"){
+<div>
+	<a href="\search?search=&categories=&borough=" class="label label-warning">Back</a>
+
+	<p>
+		<h3>Incoming Requests</h3>
+		<hr>
+		@if(incoming.size() == 0){
+			<p class="alert alert-danger">No incoming requests at this time</p> 
+		}
+		@for(in<-incoming.keySet()){
+			<p>
+				@incoming.get(in).user.first_name @incoming.get(in).user.last_name | 
+				@incoming.get(in).tools.borough.bor_name
+			</p>
+			<p>
+				@incoming.get(in).tools.tool_name
+			</p>
+			<form action="@routes.Tool.borrow(incoming.get(in).request_tool_id)" method="post">
+				<button type="submit" class="label label-success" value="Accept">Accept</button>
+			</form>
+			<form action="@routes.Request_Borrow.request_cancel(incoming.get(in).request_tool_id)" method="post">
+				<button type="submit" class="label label-warning" value="Cancel">Cancel</button>
+			</form>
+			<br>
+			<br>
+		}
+		<hr>
+		<h3>Outgoing Requests</h3>
+		<hr>
+		@if(outgoing.size() == 0){
+			<p class="alert alert-danger">You have not requested any tools at this time.</p> 
+		}
+		@for(out<-outgoing.keySet()){
+			<p>
+				@outgoing.get(out).tools.tool_owner.first_name @outgoing.get(out).tools.tool_owner.last_name | 
+				@outgoing.get(out).tools.borough.bor_name
+			</p>
+			<p>
+				@outgoing.get(out).tools.tool_name
+			</p>
+			@if(outgoing.get(out).status == 0){
+				<form action="@routes.Request_Borrow.request_withdraw(outgoing.get(out).request_tool_id)" method="post">
+					<button type="submit" class="label label-warning">Withdraw</button>
+				</form>
+			}
+			<br>
+		}
+		<hr>
+	</p>
+
+</div>
+
+}

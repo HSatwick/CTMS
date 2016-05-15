@@ -1,0 +1,13 @@
+@(username: String, email: String, borrow: Integer, toolsOwned: Integer, toolsReturned: Integer)
+
+@main("Community Tool Management System - Personal Page"){
+
+	<center>
+		<h4><u>@username</u></h4>
+		<h6><i>@email</i></h6>
+		<p>Number of tools owned: (@toolsOwned)</p>
+		<p>Number of tools borrowed: (@borrow)</p>
+		<p>Number of tools returned: (@toolsReturned)</p>
+	</center>
+	<a href="/" class="btn btn-warning">Back</a>
+}

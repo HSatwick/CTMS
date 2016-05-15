@@ -14,17 +14,15 @@
     <p>
         <div class = "row"></div>
         @if(session.containsKey("user_id")){
-    <div class="col-md-4 col-sm-4"><a class="btn btn-primary" href="/commentUI/@t.tool_id" role="button">Write Comment</a> | </div>
-    <div class="col-md-4 col-sm-4">
+    <div class="col-md-2 col-sm-2"><a class="btn btn-primary btn-xs" href="/commentUI/@t.tool_id" role="button">Write Comment</a> 
+    </div>
+    <div class="col-md-2 col-sm-2">
     <form action="@routes.Tool.returnTool(t.tool_id)" method="post">
-        <button class="btn btn-primary" type="submit">Return Tool</button>|
+        <button class="btn btn-primary btn-xs" type="submit">Return Tool</button>
     </form>
     </div>
     <!-- <a class="btn btn-primary" href="/borrowTool/@t.tool_id" role="button">Return Tool</a> |-->
     }
-    <div class="col-md-4 col-sm-4">
-    <a class="btn btn-primary" href="/displayCmt/@t.tool_id" role="button">Display Comments</a>
-        </div>
     </div>
     </p>
     }

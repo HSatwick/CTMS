@@ -21,7 +21,7 @@ import java.util.*;
 public class Users extends Model{
 
     @Id
-    protected Long user_id;
+    public Long user_id;
 
     @Constraints.Required
     public String first_name;
@@ -64,6 +64,9 @@ public class Users extends Model{
     }
 
     public static Users createNewUser(String fn, String ln, String username, String password) {
+        if(fn.trim().length() == 0 && ln.trim().length() == 0){
+            return null;
+        }
         if(password == null || username == null || (password.trim().length() < 8 && username.trim().equals(""))) {
             return null;
         }

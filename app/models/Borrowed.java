@@ -32,6 +32,9 @@ public class Borrowed extends Model {
     @ManyToOne
     public Tools tools;
 
+    @Constraints.Required
+    public int active; //0 - returned, 1 - currently borrowed
+
     public static Finder<Integer,Borrowed> borrowed = new Finder<Integer,Borrowed>(Borrowed.class);
 
 
@@ -40,6 +43,7 @@ public class Borrowed extends Model {
 
         borrow.users = user;
         borrow.tools = tools;
+        borrow.active = 1;
 
         return borrow;
     }

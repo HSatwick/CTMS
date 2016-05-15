@@ -1,4 +1,4 @@
-@(username: String, tools: List[ToolCategory], bor:List[Borough], content: Html)
+@(username: String, tools: List[ToolCategory], bor:List[Borough], num_in_bor: HashMap[Integer,Integer], num_in_cat: HashMap[Long,Integer], content: Html)
 
 @main("Community Tool Management System") {
 
@@ -22,10 +22,12 @@
         <button type="submit" class="btn btn-md btn-link" id="logIn">
             Log Out
         </button>
-        Welcome @session.get(session.get("user_id")) |
+        <a href='/personalInfo/@session.get("user_id")'>
+        Welcome @session.get(session.get("user_id")) </a> |
         <a href="/upload">Add Tools</a> |
         <a href="/inventory">Inventory</a> |
-        <a href="/currentBorrow">Current Borrowed</a>
+        <a href="/currentBorrow">Current Borrowed</a> | 
+        <a href="/requests">Requests</a>
     </div>
     }
 </form>
@@ -39,7 +41,7 @@
                 <select style="height:2.5em;" name="categories">
                     <option value="">All Tools</option>
                     @for(t <- tools){
-                    <option value="@t.cat_id">@t.cat_name</option>
+                    <option value="@t.cat_id">@t.cat_name (@num_in_cat.get(t.cat_id))</option>
                     }
                 </select>
             </div>
@@ -47,7 +49,7 @@
                 <select style="height:2.5em;" name="borough">
                     <option value="">All Borough</option>
                     @for(b <- bor){
-                    <option value="@b.bor_id">@b.bor_name</option>
+                    <option value="@b.bor_id">@b.bor_name (@num_in_bor.get(b.bor_id))</option>
                     }
                 </select>
             </div>

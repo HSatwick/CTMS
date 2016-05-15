@@ -4,29 +4,37 @@
 
 # Home page
 GET     /                           controllers.Application.index()
-GET 	/newpass/:code 				controllers.Application.obtainUrl(code:String)
-POST 	/submitPass/:code			controllers.Application.submitPassword(code:String)
+GET 	/newpass/:code 				controllers.Application.obtainUrl(code:Long)
+POST 	/submitPass/:code			controllers.Application.submitPassword(code:Long)
 GET     /user_login                 controllers.Application.showUserForm()
 POST    /newUser                    controllers.Application.logIn()
 POST    /addUser                    controllers.Application.signUp()
 GET     /logout                     controllers.Application.logout()
 GET 	/forgot_password			controllers.Application.forgotPassword()
 POST 	/reseting					controllers.Application.resetPasswordRequest()
+GET 	/personalInfo/:id 			controllers.Personal.showPersonalInfo(id:String)
 
 GET    /upload                      controllers.Tool.setUpload()
 POST   /uploading                   controllers.Tool.upload()
 
 GET    /commentUI/:id               controllers.Comments.getCommentUI(id:Long)
-GET    /displayCmt/:id              controllers.Comments.showCommentUI(id:Long)
 POST   /addComments/:id             controllers.Comments.addComment(id:Long)
 
 
 GET    /search                      controllers.Search.search()
 GET    /inventory                   controllers.Search.inventory()
 GET    /currentBorrow               controllers.Search.currentBorrow()
+GET    /requests					controllers.Search.requested()
+GET    /displayContentFor/:id 		controllers.SeeMore.displayMore(id:Long)
 
 POST   /borrow/:id                  controllers.Tool.borrow(id:Long)
 POST   /return/:id                  controllers.Tool.returnTool(id:Long)
 
+POST   /votingTool/:id/voting/:vote controllers.Voting.updateVote(id:Long, vote:Long)
+
+POST   /reqCancel/:id 				controllers.Request_Borrow.request_cancel(id:Long)
+POST   /requestTool/:id 			controllers.Request_Borrow.tool_requested(id:Long)
+POST   /reqWithdraw/:id 			controllers.Request_Borrow.request_withdraw(id:Long)
+ 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)

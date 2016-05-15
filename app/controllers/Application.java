@@ -63,7 +63,7 @@ public class Application extends Controller {
         properties.put("mail.smtp.port", "587");
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("communitytoolssharing@gmail.com", "");
+                return new PasswordAuthentication("communitytoolssharing@gmail.com", "ctms2016");
             }
         });
         try{
@@ -79,13 +79,49 @@ public class Application extends Controller {
             mex.printStackTrace();
         }   
     }
+
+    public static HashMap<Integer, Integer> getToolsinBorough(List<Borough> b){
+        HashMap<Integer, Integer> list = new HashMap<Integer, Integer>();
+        for(int i=0; i<b.size(); i++){
+            List<Tools> total_elements = Tools.find_tools.where().eq("borough",b.get(i)).eq("available",1).findList();
+            if(total_elements != null){
+                list.put(b.get(i).bor_id,total_elements.size());
+            }else{
+                list.put(b.get(i).bor_id,0);
+            }
+        }
+        return list;
+    }
+
+    public static HashMap<Long, Integer> getToolsInCategory(List<ToolCategory> tc){
+        HashMap<Long,Integer> list = new HashMap<Long,Integer>();
+        for(int i=0; i<tc.size(); i++){
+            List<Tools> tools_in_cat = Tools.find_tools.where().eq("tool_type",tc.get(i)).eq("available",1).findList();
+            if(tools_in_cat != null){
+                list.put(tc.get(i).cat_id, tools_in_cat.size());
+            }else{
+                list.put(tc.get(i).cat_id, 0);
+            }
+        }
+        return list;
+    }
+
+    public static boolean uniqueToken(Long tokens){
+        PasswordResetRequest req = PasswordResetRequest.passresreq.where().eq("token",tokens).findUnique();
+        if(req == null){
+            return true;
+        }
+        return false;
+    }
     //*************************************************************************************
 
     //controller functions
     public Result index() {
         List<ToolCategory> toolCar = ToolCategory.find.all();
         List<Borough> boroughs = Borough.borough.all();
-        return ok(index.render("",toolCar, boroughs, search.render()));
+        HashMap<Integer, Integer> tools_borough = getToolsinBorough(boroughs);
+        HashMap<Long, Integer> tools_inCat = getToolsInCategory(toolCar);
+        return ok(index.render("",toolCar, boroughs, tools_borough, tools_inCat, search.render()));
     }
 
     public Result showUserForm() {
@@ -178,12 +214,18 @@ public class Application extends Controller {
         if(emailAddress.trim().length() > 0){
             Users user = Users.find.where().eq("emailAdrs", emailAddress).findUnique();
             if(user != null){
-                String emailHash = Users.encrypePassword(emailAddress);
-                emailHash = emailHash.replaceAll("\\/","");
+                Random r = new Random();
+                long newToken = r.nextLong();
+                while(!uniqueToken(newToken)){
+                    newToken = r.nextLong();
+                }
+                if(newToken < 0){
+                    newToken *= -1;
+                }
                 String title = "Link to Renew your password for Community Tool Management Systems";
                 String content = "Dear "+user.getName()+",<br><br>";
                 content += "Click on the following link to reset your password.<br>";
-                content += "<a href='https://mysterious-atoll-4309.herokuapp.com/newpass/"+emailHash+"'>Change Password</a><br>";
+                content += "<a href='https://mysterious-atoll-4309.herokuapp.com/newpass/"+newToken+"'>Change Password</a><br>";
                 content += "<br><br>This link is only valid for 24 hours.<br><br>";
                 content += "Sincerely,<br><br>CTMS - Community Tool Management Systems";
                 connect_save_send(emailAddress,content,title);
@@ -191,7 +233,7 @@ public class Application extends Controller {
                 if(preq != null){
                     preq.delete();
                 }
-                PasswordResetRequest prr = PasswordResetRequest.requestSubmitted(emailAddress, emailHash);
+                PasswordResetRequest prr = PasswordResetRequest.requestSubmitted(emailAddress, newToken);
                 prr.save();
             }else{
                 flash("error", "Couldn't find an account with associated email");
@@ -204,8 +246,8 @@ public class Application extends Controller {
         return redirect(routes.Application.showUserForm());
     }
 
-    public Result obtainUrl(String code){
-        PasswordResetRequest pr = PasswordResetRequest.passresreq.where().eq("hashedEmail",code).findUnique();
+    public Result obtainUrl(Long code){
+        PasswordResetRequest pr = PasswordResetRequest.passresreq.where().eq("token",code).findUnique();
         if(pr == null){
             return redirect(routes.Application.forgotPassword());
         }
@@ -213,20 +255,20 @@ public class Application extends Controller {
         return ok(resetPassword.render(code, name.getName()));
     }
 
-    public Result submitPassword(String email){
+    public Result submitPassword(Long token){
         DynamicForm userForm = form().bindFromRequest();
         String passwordOne = userForm.data().get("password1");
         String passwordTwo = userForm.data().get("password2");
         if(passwordOne == null || passwordOne.trim().length() < 8){
             flash("warning","The password needs to be atleast 8 characters long");
-            return redirect(routes.Application.obtainUrl(email));
+            return redirect(routes.Application.obtainUrl(token));
         }
         if(!passwordOne.equals(passwordTwo)){
             flash("warning","The two password fields don't match up.");
-            return redirect(routes.Application.obtainUrl(email));
+            return redirect(routes.Application.obtainUrl(token));
         }
         //update the user password
-        PasswordResetRequest prreq = PasswordResetRequest.passresreq.where().eq("hashedEmail",email).findUnique();
+        PasswordResetRequest prreq = PasswordResetRequest.passresreq.where().eq("token",token).findUnique();
         Users user = Users.find.where().eq("emailAdrs",prreq.user_email).findUnique();
         if(isActiveAndinTimeRange(prreq)){
             String passwordHash = Users.encrypePassword(passwordOne);
@@ -243,7 +285,7 @@ public class Application extends Controller {
             if(prreq != null){
                 prreq.delete();
                 flash("warning","The link has expired. Please re-apply");
-                return redirect(routes.Application.obtainUrl(email));
+                return redirect(routes.Application.obtainUrl(token));
             }
         }
         return redirect(routes.Application.showUserForm());

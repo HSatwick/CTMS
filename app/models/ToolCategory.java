@@ -34,6 +34,4 @@ public class ToolCategory extends Model{
 
     public static Finder<Long,ToolCategory> find = new Finder<Long,ToolCategory>(ToolCategory.class);
 
-
-
 }

@@ -40,13 +40,7 @@ public class Comments extends Controller{
         com.user = u;
         com.datetime_posted = new DateTime();
         com.save();
-        return redirect(routes.Application.index());
-    }
-
-    public Result showCommentUI(Long id){
-        Tools t = Tools.find_tools.where().eq("tool_id",id).findUnique();
-        List<Comment> comm = Comment.find_Comments.where().eq("tool",t).findList();
-        return ok(displayComment.render(id,t,comm,Search.search,Search.categories,Search.borough));
+        return redirect(routes.SeeMore.displayMore(id));
     }
 
 }
